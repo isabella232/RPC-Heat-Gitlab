@@ -2,14 +2,14 @@ name: GitLab CE
 release: 1.0
 logo: assets/logo.png
 short_desc: |
-  RPC-Heat-GitLab delivers a deployable configuration of GitLab CE server using the Heat orchestration engine available in any Rackspace OpenStack Private Cloud.
+  RPC-Heat-GitLab delivers a deployable configuration of GitLab CE server using OpenStack Orchestration (heat) that is available in any Rackspace OpenStack Private Cloud.
 long_desc: |
-  GitLab Community Edition (GitLab CE) is open source web-based Git repository manager with wiki and issue tracking features. GitLab's wiki is also stored in git. GitLab provides a web dashboard with web file browser, filters, activity feeds, and continuous integration features. It also supports such everyday tasks as unified and side-by-side diffs, merge requests for code reviews, line specific comments, and more. Postfix is used for sending email, and email notifications can be setup at a user or global level. Unique permission levels can be configured per user and project (guest, reporter, developer, master, owner). GitLab provides Http(s) and ssh git access. Users can be authenticated using LDAP. GitLab also provides adminstrative interface for setting up users and permissions.
+  GitLab Community Edition (CE) is open source web-based Git repository manager with wiki and issue tracking features. GitLab's wiki is also stored in git. GitLab provides a web dashboard with web file browser, filters, activity feeds, and continuous integration features. It also supports such everyday tasks as unified and side-by-side diffs, merge requests for code reviews, line specific comments, and more. Postfix is used for sending email, and email notifications can be setup at a user or global level. Unique permission levels can be configured per user and project (for example, guest, reporter, developer, master, owner). GitLab provides Http(s) and ssh git access. Users can be authenticated using LDAP. GitLab also provides an administrative interface for setting up users and permissions.
 architecture: |
-  The RPC GitLab CE solution uses Heat orchestration engine and SaltStack formula to deploy GitLab server configured to run on a typical Private Cloud Configuration. We have configured GitLab to run seemlessley with Postfix mail delivery. 
+  The RPC GitLab CE solution uses OpenStack Orchestration (heat) and SaltStack formula to deploy GitLab server configured to run on a typical Private Cloud configuration. We have configured GitLab to run seamlessly with Postfix mail delivery. 
 design_specs:
-- This template uses GitLab salt-formulas to configure the server. One GitLab instance will be deployed, configured with a Postfix server.
-- For access to GitLab server, a floating ip will be assigned to the salt-master. Additionally, GitLab will also be on a separete network so that applications could access your GitLab server without being on the same network.
-- Any changes to the GitLab configuration can be done using Salt pillars on the Salt master.
+- Uses GitLab salt-formulas to configure the server. One GitLab instance will be deployed, configured with a Postfix server.
+- For access to GitLab server, a floating IP address will be assigned to the salt-master. Additionally, GitLab is on a separate network so that applications can access your GitLab server without being on the same network.
+- Changes to the GitLab configuration can be done using Salt pillars on the Salt master.
 heat_template: gitlab_stack.yaml
 

@@ -7,36 +7,35 @@ parameters:
 
   keyname:
     type: string
-    label: Salt-Master Keyname.
-    description: The name of the key that should be used to ssh into the Salt-Master.
+    label: Salt-Master Key Name
+    description: Name of the key used to ssh into the Salt-Master.
 
   image:
     type: string
     label: Image Name
-    description: Name of the existing image to use for every vm spun up by this stack. The image should have heat-config and heat-config-script baked in.
+    description: Name of the existing image to use for every virtual machine created by this stack. The image should have the heat-config and heat-config-script files included.
 
   floating-network-id:
     type: string
     label: External Network UUID
-    description: UUID of the external network. The private network created by this stack will route to this network. Also any floating ip's needed by this stack will come this network.
-
+    description: UUID of the external network. The private network created by this stack will route to this network. Any floating IP addresses needed by this stack will also route to this network.
 
   flavor:
     type: string
-    label: flavor
-    description: Flavor of Gitlab instances
+    label: Flavor
+    description: Flavor (size) of Gitlab instances.
     default: m1.small
 
   gitlab-from-email:
     type: string
     default: admin@example.com
-    label: Gitlab "from" email
-    description: Gitlab "from" email
+    label: Gitlab FROM email
+    description: Email address that Gitlab uses to send emails from.
   gitlab-hostname:
     type: string
     default: example.com
-    label: Hostname for gitlab
-    description: Hostname for gitlab
+    label: Hostname for Gitlab
+    description: Hostname for Gitlab.
 
 resources:
 
