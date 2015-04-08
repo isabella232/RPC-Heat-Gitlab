@@ -377,7 +377,7 @@ resources:
               chain: INPUT
               proto: tcp
               dport: 443
-            http:
+            http-8080:
               chain: INPUT
               proto: tcp
               dport: 8080
@@ -529,6 +529,7 @@ resources:
         salt '*' saltutil.refresh_pillar
         salt '*' mine.update
         salt '*' state.highstate
+        salt -t 90 -l debug '*' state.sls base-hardening-formula.base-hardening-formula
         touch ${prefix}.ran
 
   # Deploys the the deploy softwareconfig
