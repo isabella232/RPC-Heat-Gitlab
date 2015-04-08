@@ -309,7 +309,7 @@ resources:
             - coms
             - public_key
         state_repos: |
-          https://github.com/eglute/gitlab-formula
+          https://github.com/rcbops/gitlab-formula
           https://github.com/rcbops/base-hardening-formula
       config:
         get_resource: config-salt-master
