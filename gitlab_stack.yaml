@@ -309,7 +309,8 @@ resources:
             - coms
             - public_key
         state_repos: |
-          https://github.com/eglute/gitlab-formula
+          https://github.com/rcbops/gitlab-formula
+          https://github.com/rcbops/base-hardening-formula
       config:
         get_resource: config-salt-master
       server:
@@ -345,7 +346,7 @@ resources:
             'roles:gitlab':
               - match: grain
               - gitlab-formula
-            
+
         /srv/pillar/top.sls: |
           base:
             '*':
@@ -355,6 +356,59 @@ resources:
               - gitlab
 
         /srv/pillar/app.sls: |
+          user-ports:
+            ssh:
+              chain: INPUT
+              proto: tcp
+              dport: 22
+            salt-master:
+              chain: INPUT
+              proto: tcp
+              dport: 4505
+            salt-minion:
+              chain: INPUT
+              proto: tcp
+              dport: 4506
+            http:
+              chain: INPUT
+              proto: tcp
+              dport: 80
+            https:
+              chain: INPUT
+              proto: tcp
+              dport: 443
+            http-8080:
+              chain: INPUT
+              proto: tcp
+              dport: 8080
+            mail-465:
+              chain: INPUT
+              proto: tcp
+              dport: 465
+            mail-456:
+              chain: INPUT
+              proto: tcp
+              dport: 456
+            mail-25:
+              chain: INPUT
+              proto: tcp
+              dport: 25
+            mail-587:
+              chain: INPUT
+              proto: tcp
+              dport: 587
+            mail-143:
+              chain: INPUT
+              proto: tcp
+              dport: 143
+            mail-110:
+              chain: INPUT
+              proto: tcp
+              dport: 110
+            mail-995:
+              chain: INPUT
+              proto: tcp
+              dport: 995
           interfaces:
             private: eth0
             public: eth0
@@ -475,6 +529,7 @@ resources:
         salt '*' saltutil.refresh_pillar
         salt '*' mine.update
         salt '*' state.highstate
+        salt -t 90 -l debug '*' state.sls base-hardening-formula.base-hardening-formula
         touch ${prefix}.ran
 
   # Deploys the the deploy softwareconfig
